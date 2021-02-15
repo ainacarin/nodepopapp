@@ -1,4 +1,5 @@
-const url = "http://localhost:8000/api/posts";
+// const url = "http://localhost:8000/api/posts";
+const url = "http://localhost:8000/api/post";
 // const url ="https://gist.githubusercontent.com/kasappeal/a8724e3f1c75ba515a8d9500f4b609e7/raw/4733ee642e4cf01e95ff4284d6e252d0706804b0/fweets.json"
 export default {
 
@@ -8,7 +9,7 @@ export default {
             const data = response.json();
             return data;
         } else {
-            return {};
+            throw new Error(`HTTP: ${response.status}`)
         }
     }
 }
