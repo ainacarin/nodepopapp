@@ -1,7 +1,6 @@
 import BaseController from './BaseController.js';
 import dataService from '../services/DataService.js'
 import { advertisementView } from '../views.js';
-import pubSub from '../services/Pubsub.js';
 
 
 export default class AdvertisementsListController extends BaseController {
@@ -10,31 +9,38 @@ export default class AdvertisementsListController extends BaseController {
         super(domElement);
     }
 
+    customizeView(advertisement) {
+        advertisement.name = advertisement.name.toUpperCase();
+        if(advertisement.sale){
+            advertisement.saleText = 'Se vende';
+        } else{
+            advertisement.saleText = 'Se busca';
+        }
+        return advertisement;
+    }
+
     render(advertisements) {
         for (const advertisement of advertisements) {
             const article = document.createElement('article');
-            //customize
-            advertisement.name = advertisement.name.toUpperCase();
-            if(advertisement.sale){
-                advertisement.saleText = 'Se vende';
-            } else{
-                advertisement.saleText = 'Se busca';
-            }
-            article.innerHTML = advertisementView(advertisement);
+            
+            //customize view
+            const advertisementModified = this.customizeView(advertisement);
+
+            article.innerHTML = advertisementView(advertisementModified);
             this.domElement.appendChild(article);
         }
     }
 
     async loadAllAdvertisements() {
-        pubSub.publish('showLoader', {});
+        this.pubSub.publish(this.eventsText.SHOW_LOADER, {});
         try {
             const advertisements = await dataService.getAllAdvertisements();
             this.render(advertisements);
         } catch (error) {
             console.error("Se ha producido un error en loadAllAdvertisements",error);
-            pubSub.publish('displayError', error);
+            this.pubSub.publish('displayError', error);
         } finally {
-            pubSub.publish('hideLoader', {});
+            this.pubSub.publish(this.eventsText.HIDE_LOADER, {});
         }
     }
 

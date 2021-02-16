@@ -1,5 +1,4 @@
 import BaseController from './BaseController.js';
-import pubSub from '../services/Pubsub.js';
 import { errorView } from '../views.js';
 
 export default class ErrorController extends BaseController {
@@ -7,7 +6,7 @@ export default class ErrorController extends BaseController {
     constructor(domElement){
         super(domElement);
         
-        pubSub.subscribe('displayError', (error) => {
+        this.pubSub.subscribe(this.eventsText.DISPLAY_ERROR, (error) => {
             this.displayError(error);
         });
 
