@@ -1,15 +1,33 @@
-const url = "http://localhost:8000/api/posts";
+const BASE_URL = "http://localhost:8000/";
 // const url = "http://localhost:8000/api/post";
-// const url ="https://gist.githubusercontent.com/kasappeal/a8724e3f1c75ba515a8d9500f4b609e7/raw/4733ee642e4cf01e95ff4284d6e252d0706804b0/fweets.json"
-export default {
 
-    getAllAdvertisements: async () => {
-        const response = await fetch(url);
-        if(response.ok) {
-            const data = response.json();
-            return data;
-        } else {
-            throw new Error(`HTTP: ${response.status}`)
-        }
+export default {
+  getAllAdvertisements: async () => {
+    const url = `${BASE_URL}api/posts`;
+    const response = await fetch(url);
+
+    if (response.ok) {
+      const responseData = response.json();
+      return responseData;
+    } else {
+      throw new Error(`HTTP: ${response.status}`);
     }
-}
+  },
+
+  registerUser: async (user) => {
+    const url = `${BASE_URL}auth/register`;
+    // confige POST
+    const postConfig = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user),
+    };
+    const response = await fetch(url, postConfig);
+    const responseData = await response.json();
+    if (response.ok) {
+        return responseData;
+    } else {
+        throw new Error(responseData.message || JSON.stringify(responseData));
+    }
+  },
+};

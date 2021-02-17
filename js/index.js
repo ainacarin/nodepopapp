@@ -2,7 +2,7 @@ import AdvertisementsListController from './controllers/AdvertisementsListContro
 import LoaderController from './controllers/LoaderController.js';
 import ErrorController from './controllers/ErrorController.js';
 
-window.addEventListener('DOMContentLoaded', async (event) => {
+window.addEventListener('DOMContentLoaded', (event) => {
 
   const loaderDOMElement = document.querySelector('.lds-roller');
   const loaderController = new LoaderController(loaderDOMElement);

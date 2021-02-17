@@ -22,7 +22,7 @@ export default class AdvertisementsListController extends BaseController {
     render(advertisements) {
         for (const advertisement of advertisements) {
             const article = document.createElement('article');
-            
+
             //customize view
             const advertisementModified = this.customizeView(advertisement);
 

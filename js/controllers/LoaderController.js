@@ -6,9 +6,9 @@ export default class LoaderController extends BaseController {
     constructor(domElement){
         super(domElement);
 
-        pubSub.subscribe(this.eventsText.SHOW_LOADER, (event) => {
+        pubSub.subscribe(this.eventsText.SHOW_LOADER, () => {
             this.showLoader()});
-        pubSub.subscribe(this.eventsText.HIDE_LOADER, (event) => { 
+        pubSub.subscribe(this.eventsText.HIDE_LOADER, () => { 
             this.hideLoader();});
     }
 
