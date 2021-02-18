@@ -24,7 +24,6 @@ export default class RegisterController extends BaseController {
             try {
                 const registeredUser = await dataService.registerUser(user);
                 alert('Usuario creado');
-                console.log('USUARIO CREADO', registeredUser);
                 window.location.href = '/register.html'; 
             } catch (error) {
                 this.publish(this.eventsText.DISPLAY_ERROR, error);
@@ -42,23 +41,33 @@ export default class RegisterController extends BaseController {
         }
     }
     
-    configOneInputListener(inputElement) {
-        inputElement.addEventListener('keyup', (event) => {
-            if(inputElement.validity.valid) {
-                inputElement.classList.add('is-success');
-                inputElement.classList.remove('is-danger');
-            } else {
-                inputElement.classList.add('is-danger');
-                inputElement.classList.remove('is-success');
-            }
-            // after each keyup validates the form to change disabled attribute
-            this.checkValidityRegisterForm();
-        })
-    }
+    // configOneInputListener(inputElement) {
+    //     inputElement.addEventListener('keyup', (event) => {
+    //         if(inputElement.validity.valid) {
+    //             inputElement.classList.add('is-success');
+    //             inputElement.classList.remove('is-danger');
+    //         } else {
+    //             inputElement.classList.add('is-danger');
+    //             inputElement.classList.remove('is-success');
+    //         }
+    //         // after each keyup validates the form to change disabled attribute
+    //         this.checkValidityRegisterForm();
+    //     })
+    // }
 
     configAllInputsListeners() {
         this.domElement.querySelectorAll('input').forEach(inputElement => {
-            this.configOneInputListener(inputElement);
+            inputElement.addEventListener('keyup', (event) => {
+                if(inputElement.validity.valid) {
+                    inputElement.classList.add('is-success');
+                    inputElement.classList.remove('is-danger');
+                } else {
+                    inputElement.classList.add('is-danger');
+                    inputElement.classList.remove('is-success');
+                }
+                // after each keyup validates the form to change disabled attribute
+                this.checkValidityRegisterForm();
+            })
         })
     }
 
