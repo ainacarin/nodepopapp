@@ -113,3 +113,10 @@
 .global-errors {
     padding: 20% 10%;
   }
+
+  /* Buttons new post / login or register */
+  .new-advertisement {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+  }

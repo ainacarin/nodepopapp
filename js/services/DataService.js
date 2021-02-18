@@ -57,6 +57,15 @@ export default {
 
   saveToken: async function(token) {
     localStorage.setItem(TOKEN_KEY, token);
+  },
+
+  getToken: async function() {
+    return localStorage.getItem(TOKEN_KEY);
+  },
+
+ isUserLogged: async function() {
+    const isToken = await this.getToken();
+    return isToken !== null;
   }
 
 };

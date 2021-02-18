@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nodepop</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
 
     <div class="global-errors hidden"></div>
 
     <div class="container">
-        <div class="columns">
-            <div class="column is-two-thirds">
-                <main class="advertisements-list"></main>
-            </div>
+      <div class="columns">
+        <div class="column is-two-thirds">
+          <main class="advertisements-list"></main>
         </div>
+      </div>
+    </div>
+
+    <div class="new-advertisement">
+      <a href="/new-advertisement.html" class="button is-primary is-hidden new-advertisement-button">Nuevo anuncio</a>
+
+      <div class="is-hidden login-register-buttons">
+        <a href="/login.html" class="button is-primary">Login</a> or
+        <a href="/register.html" class="button is-primary">Registro</a>
+      </div>
     </div>
     <script type="module" src="js/index.js"></script>
-</body>
+  </body>
 </html>
