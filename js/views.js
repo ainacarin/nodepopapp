@@ -10,6 +10,7 @@ export const advertisementView = (advertisement) => {
           <div class="media-content">
             <p class="subtitle is-6">${advertisement.saleText}</p>
             <p class="title is-4">${advertisement.price}</p>
+            <p class="subtitle is-6">${advertisement.user.username}</p>
           </div>
         </div>
       </div>

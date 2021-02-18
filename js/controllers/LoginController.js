@@ -1,7 +1,7 @@
 import BaseController from "./BaseController.js";
 import dataService from "../services/DataService.js";
 
-export default class RegisterController extends BaseController {
+export default class LoginController extends BaseController {
 
     constructor(domElement) {
         super(domElement);
@@ -9,6 +9,19 @@ export default class RegisterController extends BaseController {
 
         //config Listeners
         this.configAllListeners();
+    }
+
+    redirect() {
+        // const queryParams = window.location.search.replace('?', '');
+        let nextPage = '/';
+        // if(queryParams.indexOf('next') > -1) {
+        //     const queryParams = window.location.search.replace('?', '');  // ?next=otrapagina -> next=otrapagina
+        //     const queryParamsParts = queryParams.split('=');
+        //     if (queryParamsParts.length >= 2 && queryParamsParts[0] === 'next') {
+        //         nextPage = queryParamsParts[1];
+        //     }
+        // }
+        window.location.href = nextPage;
     }
 
     configSubmitListener() {
@@ -22,9 +35,12 @@ export default class RegisterController extends BaseController {
             // send data
             this.publish(this.eventsText.SHOW_LOADER);
             try {
-                const registeredUser = await dataService.registerUser(user);
-                alert('Usuario creado');
-                window.location.href = '/login.html'; 
+                const loggedData = await dataService.loginUser(user);
+                // save token in local storage
+                dataService.saveToken(loggedData.accessToken);
+                // redirect to login page
+                console.log('entra en redirect');
+                this.redirect();
             } catch (error) {
                 this.publish(this.eventsText.DISPLAY_ERROR, error);
             } finally {
@@ -40,20 +56,6 @@ export default class RegisterController extends BaseController {
             this.submitButton.setAttribute('disabled', true);
         }
     }
-    
-    // configOneInputListener(inputElement) {
-    //     inputElement.addEventListener('keyup', (event) => {
-    //         if(inputElement.validity.valid) {
-    //             inputElement.classList.add('is-success');
-    //             inputElement.classList.remove('is-danger');
-    //         } else {
-    //             inputElement.classList.add('is-danger');
-    //             inputElement.classList.remove('is-success');
-    //         }
-    //         // after each keyup validates the form to change disabled attribute
-    //         this.checkValidityRegisterForm();
-    //     })
-    // }
 
     configAllInputsListeners() {
         this.domElement.querySelectorAll('input').forEach(inputElement => {
