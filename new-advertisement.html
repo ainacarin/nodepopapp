@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodepop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+    <div class="global-errors hidden"></div>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column is-two-thirds">
+                <h1 class="title">Nuevo anuncio</h1>
+                <form class="column is-two-thirds">
+                    <p class="field">
+                        <label class="label" for="name">Nombre del artículo</label>
+                        <input id="name" name="name" class="input is-primary is-rounded" type="text" placeholder="Example" required>
+                    </p>
+                    <p class="field">
+                        <label class="label" for="radio-sale">¿Qué desea hacer con el artículo?</label>
+                        <div class="field">
+                            <div class="control" id="radio-sale">
+                              <label class="radio">
+                                <input type="radio" name="sale" required>
+                                Se vende
+                              </label>
+                              <label class="radio">
+                                <input type="radio" name="sale" required>
+                                Se busca
+                              </label>
+                            </div>
+                          </div>
+                    </p>
+                    <p class="field">
+                        <label class="label" for="price">Precio</label>
+                      <input name="price" id="price" class="input is-primary is-rounded" type="number" placeholder="€" required>
+                    </p>
+                    <p class="field">
+                        <label class="label" for="image">Precio</label>
+                        <input type="file" name="image" id="image" accept="image/*" class="is-primary">
+                    </p>
+                    <p class="field">
+                        <button class="button is-primary is-pulled-right" disabled>Publicar</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/new-tweet.js"></script>
+</body>
+</html>
