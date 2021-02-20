@@ -12,15 +12,15 @@ export default class LoginController extends BaseController {
     }
 
     redirect() {
-        // const queryParams = window.location.search.replace('?', '');
+        const queryParams = window.location.search.replace('?', '');
         let nextPage = '/';
-        // if(queryParams.indexOf('next') > -1) {
-        //     const queryParams = window.location.search.replace('?', '');  // ?next=otrapagina -> next=otrapagina
-        //     const queryParamsParts = queryParams.split('=');
-        //     if (queryParamsParts.length >= 2 && queryParamsParts[0] === 'next') {
-        //         nextPage = queryParamsParts[1];
-        //     }
-        // }
+        if(queryParams.indexOf('next') > -1) {
+            const queryParams = window.location.search.replace('?', '');  // ?next=otrapagina -> next=otrapagina
+            const queryParamsParts = queryParams.split('=');
+            if (queryParamsParts.length >= 2 && queryParamsParts[0] === 'next') {
+                nextPage = queryParamsParts[1];
+            }
+        }
         window.location.href = nextPage;
     }
 
