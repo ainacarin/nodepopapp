@@ -6,6 +6,7 @@ export default {
   manageResponseData(responseData) {
     return responseData.map((post) => {
       return {
+        id: post.id,
         name: post.name.replace(/(<([^>]+)>)/gi, ""),
         price: `${post.price}€`,
         sale: post.sale,

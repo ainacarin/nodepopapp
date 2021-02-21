@@ -32,6 +32,12 @@ export default class AdvertisementsListController extends BaseController {
                     advertisementImage.setAttribute("src", "https://bulma.io/images/placeholders/1280x960.png")
                 });
             }
+            const detailButton = article.querySelector('button');
+            if(detailButton) {
+                detailButton.addEventListener('click', event => {
+                    window.location.href = '/detail-advertisement.html?id=' + advertisement.id;
+                })
+            }
             this.domElement.appendChild(article);
         }
     }

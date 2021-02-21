@@ -1,12 +1,13 @@
 export const advertisementView = (advertisement) => {
+  let buttonDetailHTML =  '<button class="button is-primary">Ver detalle</button>';
   let imgHTML = '';
-  if (advertisement.image) {
-    imgHTML = `<div class="card-image">
-    <figure class="image is-4by3">
-    <img src="${advertisement.image}" alt="Placeholder image">
-    </figure>
-</div>`;
-  }
+    if (advertisement.image) {
+      imgHTML = `<div class="card-image">
+        <figure class="image is-4by3">
+          <img src="${advertisement.image}" alt="Placeholder image">
+        </figure>
+        </div>`;
+    }
     return `<div class="card">
     <div class="card-header">
     <div class="card-header-title is-centered">
@@ -19,6 +20,7 @@ export const advertisementView = (advertisement) => {
             <p class="subtitle is-6">${advertisement.saleText}</p>
             <p class="title is-4">${advertisement.price}</p>
             <p class="subtitle is-6">${advertisement.user.username}</p>
+            <p class="field is-pulled-right">${buttonDetailHTML}</p>
           </div>
         </div>
       </div>
