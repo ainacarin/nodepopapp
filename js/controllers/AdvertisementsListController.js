@@ -25,8 +25,13 @@ export default class AdvertisementsListController extends BaseController {
 
             //customize view
             const advertisementModified = this.customizeView(advertisement);
-
             article.innerHTML = advertisementView(advertisementModified);
+            const advertisementImage = article.querySelector('img');
+            if(advertisementImage) {
+                advertisementImage.addEventListener('error', event => {  
+                    advertisementImage.setAttribute("src", "https://bulma.io/images/placeholders/1280x960.png")
+                });
+            }
             this.domElement.appendChild(article);
         }
     }

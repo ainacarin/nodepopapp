@@ -30,27 +30,28 @@ export default class NewAdvertisementController extends BaseController {
 
 
     configNewAdvertisementButtonListeners() {
-        const buttonNewAdvertisement = this.domElement.querySelector('.button-new-advertisement');
-        buttonNewAdvertisement.addEventListener('submit', event => {
+        this.domElement.addEventListener('submit', async event => {
             event.preventDefault();
-            // const advertisement = {
-            //     name: this.domElement.elements.name.value,
-            //     sale: this.domElement.elements.sale.value,
-            //     price: this.domElement.elements.price.value,
-            //     image: null
-            // }
-            // if (this.domElement.elements.image.files.length > 0) {
-            //     advertisement.image = this.domElement.elements.image.files[0];
-            // }
-            // this.publish(this.eventsText.START_LOADING);
-            // try {
-            //     await dataService.saveAdvertisement(advertisement);
-            //     window.location.href = '/'
-            // } catch (error) {
-            //     this.publish(this.events.ERROR, error)
-            // } finally {
-            //     this.publish(this.events.FINISH_LOADING)
-            // }
+            const sale = this.domElement.elements.selectSale.options[selectSale.selectedIndex].value;
+            const advertisement = {
+                name: this.domElement.elements.name.value,
+                sale: sale,
+                price: this.domElement.elements.price.value,
+                image: null
+            }
+            if (this.domElement.elements.image.files.length > 0) {
+                advertisement.image = this.domElement.elements.image.files[0];
+            } 
+            this.publish(this.eventsText.SHOW_LOADER);
+            try {
+                console.log('save advertisement', advertisement);
+                await dataService.saveNewAdvertisement(advertisement);
+                window.location.href = '/?note=newadvOk';
+            } catch (error) {
+                this.publish(this.eventsText.DISPLAY_ERROR, error);
+            } finally {
+                this.publish(this.eventsText.HIDE_LOADER);
+            }
         })
     }
 
