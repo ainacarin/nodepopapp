@@ -52,7 +52,6 @@ export default class AdvertisementsListController extends BaseController {
             const advertisements = await dataService.getAllAdvertisements();
             this.render(advertisements);
         } catch (error) {
-            console.error("Se ha producido un error en loadAllAdvertisements",error);
             this.pubSub.publish('displayError', error);
         } finally {
             this.pubSub.publish(this.eventsText.HIDE_LOADER, {});

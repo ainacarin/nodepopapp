@@ -44,7 +44,6 @@ export default class NewAdvertisementController extends BaseController {
             } 
             this.publish(this.eventsText.SHOW_LOADER);
             try {
-                console.log('save advertisement', advertisement);
                 await dataService.saveNewAdvertisement(advertisement);
                 window.location.href = '/?note=newadvOk';
             } catch (error) {

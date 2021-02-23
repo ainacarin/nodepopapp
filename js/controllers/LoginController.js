@@ -39,7 +39,6 @@ export default class LoginController extends BaseController {
                 // save token in local storage
                 dataService.saveToken(loggedData.accessToken);
                 // redirect to login page
-                console.log('entra en redirect');
                 this.redirect();
             } catch (error) {
                 this.publish(this.eventsText.DISPLAY_ERROR, error);

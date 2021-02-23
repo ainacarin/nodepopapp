@@ -66,7 +66,6 @@ export default {
   },
 
   postImage: async function (url, postData) {
-    console.log("postData", postData);
     // configure POST
     const postConfig = {
       method: "POST",
@@ -150,7 +149,6 @@ export default {
     form.append("file", image);
     const url = `${BASE_URL}upload`;
     const response = await this.postImage(url, form);
-    console.log("path", response.path);
     return response.path || null;
   },
 
@@ -170,7 +168,6 @@ export default {
 
 // delete url vacio true
   delete: async function(url) {
-    console.log('url', url);
     const config = {
         method: 'DELETE',
         headers: {}
@@ -181,7 +178,6 @@ export default {
     }
     const response = await fetch(url, config);
     const data = await response.json();  // respuesta del servidor sea OK o sea ERROR.
-    console.log('data delete', data);
     if (response.ok) {
         return data;
     } else {            

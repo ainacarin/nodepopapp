@@ -6,18 +6,8 @@ export default class DetailAdvertisementController extends BaseController {
 
     constructor(domElement) {
         super(domElement);
-        // this.checkIfUserIsLogged();
         this.loadDetailAdvertisement();
     }
-
-    // async checkIfUserIsLogged() {
-    //     const isUserLogged = await dataService.isUserLogged();
-    //     if (isUserLogged) {
-    //         this.publish(this.eventsText.HIDE_LOADER);
-    //     } else {
-    //         window.location.href = '/login.html?next=/new-advertisement.html';
-    //     }
-    // }
 
     customizeView(advertisement) {
         advertisement.name = advertisement.name.toUpperCase();
@@ -44,11 +34,20 @@ export default class DetailAdvertisementController extends BaseController {
         const deleteButton = article.querySelector('button');
         if(deleteButton) {
             deleteButton.addEventListener('click', async event => {
-                const deleteConfirmed = confirm('¿Seguro que desea borrar el artículo?');
-                if (deleteConfirmed) {
-                    await dataService.deleteAdvertisement(advertisementModified.id);
-                    this.publish(this.eventsText.ADVERTISEMENT_DELETED, {});
-                    window.location.href = '/';
+                try {
+                    const isUserLogged = await dataService.isUserLogged();
+                    if(isUserLogged) {
+                        const deleteConfirmed = confirm('¿Seguro que desea borrar el artículo?');
+                        if (deleteConfirmed) {
+                            await dataService.deleteAdvertisement(advertisementModified.id);
+                            this.publish(this.eventsText.ADVERTISEMENT_DELETED, {});
+                            window.location.href = '/';
+                        }
+                    } else{
+                        window.location.href = '/login.html';
+                    }
+                } catch (error) {
+                    this.publish(this.eventsText.DISPLAY_ERROR, error);
                 }
             })
         }
@@ -72,16 +71,6 @@ export default class DetailAdvertisementController extends BaseController {
             this.publish(this.eventsText.HIDE_LOADER);
           }
 
-
-        // try {
-        //     const advertisement = await dataService.getOneAdvertisement();
-        //     this.render(advertisement);
-        // } catch (error) {
-        //     console.error("Se ha producido un error en loadOneAdvertisement",error);
-        //     this.pubSub.publish('displayError', error);
-        // } finally {
-        //     this.pubSub.publish(this.eventsText.HIDE_LOADER, {});
-        // }
     }
 
 }
