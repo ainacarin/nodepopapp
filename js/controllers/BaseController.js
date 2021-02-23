@@ -9,12 +9,13 @@ export default class BaseController {
         this.eventsText= {
             SHOW_LOADER: 'showLoader',
             HIDE_LOADER: 'hideLoader',
-            DISPLAY_ERROR: 'displayError'
+            DISPLAY_ERROR: 'displayError',
+            ADVERTISEMENT_DELETED: 'advertisementDeleted'
         }
     }
 
     subscribe(eventName, eventHandler) {
-        this.pubSub.subscribe(eventText, eventHandler);
+        this.pubSub.subscribe(eventName, eventHandler);
     }
 
     publish(eventName, eventData) {  

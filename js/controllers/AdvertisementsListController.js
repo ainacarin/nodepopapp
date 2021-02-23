@@ -7,6 +7,10 @@ export default class AdvertisementsListController extends BaseController {
 
     constructor(domElement){
         super(domElement);
+
+        this.subscribe(this.eventsText.ADVERTISEMENT_DELETED, event => {
+            this.loadAllAdvertisements();
+        });
     }
 
     customizeView(advertisement) {

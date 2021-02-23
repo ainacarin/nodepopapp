@@ -3,19 +3,40 @@ const TOKEN_KEY = "token";
 // const url = "http://localhost:8000/api/post";
 
 export default {
-  manageResponseData(responseData) {
-    return responseData.map((post) => {
-      return {
-        id: post.id,
-        name: post.name.replace(/(<([^>]+)>)/gi, ""),
-        price: `${post.price}€`,
-        sale: post.sale,
-        user: {
-          username: post.user.username.replace(/(<([^>]+)>)/gi, ""),
-        },
-        image: post.image,
+  manageOneData(item, currentUser = null) {
+    const modifiedItem = {
+      id: item.id,
+      name: item.name.replace(/(<([^>]+)>)/gi, ""),
+      price: `${item.price}€`,
+      sale: item.sale,
+      image: item.image,
+      isFromCurrentUser: currentUser
+        ? currentUser.userId === item.userId
+        : false,
+    };
+    if (currentUser) {
+      modifiedItem.user = {
+        username: currentUser.username.replace(/(<([^>]+)>)/gi, ""),
       };
-    });
+    } else {
+      modifiedItem.user = {
+        username: item.user.username.replace(/(<([^>]+)>)/gi, ""),
+      };
+    }
+
+    return modifiedItem;
+  },
+
+  manageResponseData(responseData, currentUser = null) {
+    if (currentUser) {
+      // 1 advertisement
+      return this.manageOneData(responseData, currentUser);
+    } else {
+      // list advertisements
+      return responseData.map((itemAdvertisement) => {
+        return this.manageOneData(itemAdvertisement);
+      });
+    }
   },
 
   getAllAdvertisements: async function () {
@@ -24,23 +45,37 @@ export default {
 
     if (response.ok) {
       const responseData = await response.json();
-      return this.manageResponseData(responseData);
+      return this.manageResponseData(responseData, null);
+    } else {
+      throw new Error(`HTTP: ${response.status}`);
+    }
+  },
+
+  getOneAdvertisement: async function (idAdvertisement) {
+    const currentUser = await this.getUser();
+    const url = `${BASE_URL}api/advertisements/` + idAdvertisement;
+    const response = await fetch(url);
+
+    if (response.ok) {
+      const responseData = await response.json();
+      return this.manageResponseData(responseData, currentUser);
+      // return responseData;
     } else {
       throw new Error(`HTTP: ${response.status}`);
     }
   },
 
   postImage: async function (url, postData) {
-    console.log('postData', postData);
+    console.log("postData", postData);
     // configure POST
     const postConfig = {
       method: "POST",
       headers: {},
-      body: postData
+      body: postData,
     };
     const token = await this.getToken();
     if (token) {
-        postConfig.headers['Authorization'] = `Bearer ${token}`;
+      postConfig.headers["Authorization"] = `Bearer ${token}`;
     }
     const response = await fetch(url, postConfig);
     const responseData = await response.json();
@@ -60,7 +95,7 @@ export default {
     };
     const token = await this.getToken();
     if (token) {
-        postConfig.headers['Authorization'] = `Bearer ${token}`;
+      postConfig.headers["Authorization"] = `Bearer ${token}`;
     }
     const response = await fetch(url, postConfig);
     const responseData = await response.json();
@@ -94,12 +129,28 @@ export default {
     return isToken !== null;
   },
 
+  getUser: async function () {
+    try {
+      const token = await this.getToken();
+      const tokenParts = token.split(".");
+      if (tokenParts.length !== 3) {
+        return null;
+      }
+      const payload = tokenParts[1]; // cogemos el payload, codificado en base64
+      const jsonStr = atob(payload); // descodificamos el base64
+      const { userId, username } = JSON.parse(jsonStr); // parseamos el JSON del token descodificado
+      return { userId, username };
+    } catch (error) {
+      return null;
+    }
+  },
+
   uploadImage: async function (image) {
     const form = new FormData();
     form.append("file", image);
     const url = `${BASE_URL}upload`;
     const response = await this.postImage(url, form);
-    console.log('path',response.path);
+    console.log("path", response.path);
     return response.path || null;
   },
 
@@ -109,12 +160,39 @@ export default {
       const imageURL = await this.uploadImage(advertisement.image);
       advertisement.image = imageURL;
     }
-    if(advertisement.sale == "true") {
+    if (advertisement.sale == "true") {
       advertisement.sale = true;
-    } else{
+    } else {
       advertisement.sale = false;
     }
     return await this.post(url, advertisement);
   },
 
+// delete url vacio true
+  delete: async function(url) {
+    console.log('url', url);
+    const config = {
+        method: 'DELETE',
+        headers: {}
+    };
+    const token = await this.getToken();
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    const response = await fetch(url, config);
+    const data = await response.json();  // respuesta del servidor sea OK o sea ERROR.
+    console.log('data delete', data);
+    if (response.ok) {
+        return data;
+    } else {            
+        // TODO: mejorar gestión de errores
+        // TODO: si la respuesta es un 401 no autorizado, debemos borrar el token (si es que lo tenemos);
+        throw new Error(data.message || JSON.stringify(data));
+    }
+},
+
+  deleteAdvertisement: async function (idAdvertisement) {
+    const url = `${BASE_URL}api/advertisements/${idAdvertisement}`;
+    return await this.delete(url);
+  }
 };
