@@ -75,3 +75,11 @@ export const advertisementDetailView = (advertisement) => {
   ${buttonDeleteHTML}
 </div>`
   };
+
+  export const emptyAdvertisementsList =  `<div class="card">
+    <div class="card-header">
+    <div class="card-header-title is-centered">
+    No hay anuncios para mostrar
+    </div>
+    </div>
+    </div>`;

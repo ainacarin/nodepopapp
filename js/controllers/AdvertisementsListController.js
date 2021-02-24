@@ -1,6 +1,6 @@
 import BaseController from './BaseController.js';
 import dataService from '../services/DataService.js'
-import { advertisementView } from '../views.js';
+import { advertisementView, emptyAdvertisementsList } from '../views.js';
 
 
 export default class AdvertisementsListController extends BaseController {
@@ -24,26 +24,34 @@ export default class AdvertisementsListController extends BaseController {
     }
 
     render(advertisements) {
-        for (const advertisement of advertisements) {
-            const article = document.createElement('article');
+        console.log('render', advertisements);
+        // if(advertisements) {
+        //     const article = document.createElement('article');
+        //     article.innerHTML = emptyAdvertisementsList;
+        //     this.domElement.appendChild(article);
+        // } else{
 
-            //customize view
-            const advertisementModified = this.customizeView(advertisement);
-            article.innerHTML = advertisementView(advertisementModified);
-            const advertisementImage = article.querySelector('img');
-            if(advertisementImage) {
-                advertisementImage.addEventListener('error', event => {  
-                    advertisementImage.setAttribute("src", "https://bulma.io/images/placeholders/1280x960.png")
-                });
+            for (const advertisement of advertisements) {
+                const article = document.createElement('article');
+                
+                //customize view
+                const advertisementModified = this.customizeView(advertisement);
+                article.innerHTML = advertisementView(advertisementModified);
+                const advertisementImage = article.querySelector('img');
+                if(advertisementImage) {
+                    advertisementImage.addEventListener('error', event => {  
+                        advertisementImage.setAttribute("src", "https://bulma.io/images/placeholders/1280x960.png")
+                    });
+                }
+                const detailButton = article.querySelector('button');
+                if(detailButton) {
+                    detailButton.addEventListener('click', event => {
+                        window.location.href = '/detail-advertisement.html?id=' + advertisement.id;
+                    })
+                }
+                this.domElement.appendChild(article);
             }
-            const detailButton = article.querySelector('button');
-            if(detailButton) {
-                detailButton.addEventListener('click', event => {
-                    window.location.href = '/detail-advertisement.html?id=' + advertisement.id;
-                })
-            }
-            this.domElement.appendChild(article);
-        }
+        // }
     }
 
     async loadAllAdvertisements() {
@@ -52,7 +60,7 @@ export default class AdvertisementsListController extends BaseController {
             const advertisements = await dataService.getAllAdvertisements();
             this.render(advertisements);
         } catch (error) {
-            this.pubSub.publish('displayError', error);
+            this.pubSub.publish(this.eventsText.DISPLAY_ERROR, error);
         } finally {
             this.pubSub.publish(this.eventsText.HIDE_LOADER, {});
         }
