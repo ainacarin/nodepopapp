@@ -1,5 +1,6 @@
 import BaseController from './BaseController.js';
 import { errorView } from '../views.js';
+import dataService from '../services/DataService.js';
 
 export default class ErrorController extends BaseController {
 

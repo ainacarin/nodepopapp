@@ -24,7 +24,16 @@ export default class RegisterController extends BaseController {
             try {
                 const registeredUser = await dataService.registerUser(user);
                 alert('Usuario creado');
-                window.location.href = '/login.html'; 
+                console.log('registrado', registeredUser);
+                // window.location.href = '/login.html'; 
+                const loggedUSer = await dataService.loginUser(user);
+                if(registeredUser && loggedUSer.accessToken) {
+                        dataService.saveToken(loggedUSer.accessToken);
+                        window.location.href = '/'; 
+                } else {
+                    window.location.href = '/login.html'; 
+                }
+                
             } catch (error) {
                 this.publish(this.eventsText.DISPLAY_ERROR, error);
             } finally {

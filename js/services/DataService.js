@@ -1,3 +1,5 @@
+import userDataService from './UserService.js';
+
 const BASE_URL = "http://localhost:8000/";
 const TOKEN_KEY = "token";
 // const url = "http://localhost:8000/api/post";
@@ -42,6 +44,24 @@ export default {
     // }
   },
 
+  request: async function (url, requestConfig = null) {
+    // const token = await this.getToken();
+    const token = await userDataService.getToken();
+    if (token) {
+      requestConfig.headers["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await fetch(url, requestConfig);
+    const responseData = await response.json();
+    if (response.ok) {
+      return responseData;
+    } else {
+      if(response.status == 401 && userDataService.isUserLogged()) { //Unauthorized + token => delete token
+        userDataService.deleteToken();
+      }
+      throw new Error(responseData.message || JSON.stringify(responseData));
+    }
+  },
+
   getAllAdvertisements: async function () {
     const url = `${BASE_URL}api/advertisements?_expand=user&_sort=id&_order=desc`;
     const response = await fetch(url);
@@ -62,7 +82,6 @@ export default {
     if (response.ok) {
       const responseData = await response.json();
       return this.manageOneResponseData(responseData, currentUser);
-      // return responseData;
     } else {
       throw new Error(`HTTP: ${response.status}`);
     }
@@ -75,17 +94,19 @@ export default {
       headers: {},
       body: postData,
     };
-    const token = await this.getToken();
-    if (token) {
-      postConfig.headers["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await fetch(url, postConfig);
-    const responseData = await response.json();
-    if (response.ok) {
-      return responseData;
-    } else {
-      throw new Error(responseData.message || JSON.stringify(responseData));
-    }
+    return await this.request(url, postConfig);
+    // // const token = await this.getToken();
+    // const token = await userDataService.getToken();
+    // if (token) {
+    //   postConfig.headers["Authorization"] = `Bearer ${token}`;
+    // }
+    // const response = await fetch(url, postConfig);
+    // const responseData = await response.json();
+    // if (response.ok) {
+    //   return responseData;
+    // } else {
+    //   throw new Error(responseData.message || JSON.stringify(responseData));
+    // }
   },
 
   post: async function (url, postData) {
@@ -95,17 +116,19 @@ export default {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(postData),
     };
-    const token = await this.getToken();
-    if (token) {
-      postConfig.headers["Authorization"] = `Bearer ${token}`;
-    }
-    const response = await fetch(url, postConfig);
-    const responseData = await response.json();
-    if (response.ok) {
-      return responseData;
-    } else {
-      throw new Error(responseData.message || JSON.stringify(responseData));
-    }
+    return await this.request(url, postConfig);
+    // // const token = await this.getToken();
+    // const token = await userDataService.getToken();
+    // if (token) {
+    //   postConfig.headers["Authorization"] = `Bearer ${token}`;
+    // }
+    // const response = await fetch(url, postConfig);
+    // const responseData = await response.json();
+    // if (response.ok) {
+    //   return responseData;
+    // } else {
+    //   throw new Error(responseData.message || JSON.stringify(responseData));
+    // }
   },
 
   registerUser: async function (user) {
@@ -119,29 +142,32 @@ export default {
   },
 
   saveToken: async function (token) {
-    localStorage.setItem(TOKEN_KEY, token);
+    // localStorage.setItem(TOKEN_KEY, token);
+    await userDataService.saveToken(token);
   },
 
-  getToken: async function () {
-    return localStorage.getItem(TOKEN_KEY);
-  },
+  // getToken: async function () {
+    // return localStorage.getItem(TOKEN_KEY);
+  // },
 
   isUserLogged: async function () {
-    const isToken = await this.getToken();
-    return isToken !== null;
+  //   const isToken = await this.getToken();
+  //   return isToken !== null;
+    return await userDataService.isUserLogged();
   },
 
   getUser: async function () {
     try {
-      const token = await this.getToken();
-      const tokenParts = token.split(".");
-      if (tokenParts.length !== 3) {
-        return null;
-      }
-      const payload = tokenParts[1]; // cogemos el payload, codificado en base64
-      const jsonStr = atob(payload); // descodificamos el base64
-      const { userId, username } = JSON.parse(jsonStr); // parseamos el JSON del token descodificado
-      return { userId, username };
+      return await userDataService.getUser();
+  //     const token = await this.getToken();
+  //     const tokenParts = token.split(".");
+  //     if (tokenParts.length !== 3) {
+  //       return null;
+  //     }
+  //     const payload = tokenParts[1]; // cogemos el payload, codificado en base64
+  //     const jsonStr = atob(payload); // descodificamos el base64
+  //     const { userId, username } = JSON.parse(jsonStr); // parseamos el JSON del token descodificado
+  //     return { userId, username };
     } catch (error) {
       return null;
     }
@@ -175,19 +201,21 @@ export default {
         method: 'DELETE',
         headers: {}
     };
-    const token = await this.getToken();
-    if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    const response = await fetch(url, config);
-    const data = await response.json();  // respuesta del servidor sea OK o sea ERROR.
-    if (response.ok) {
-        return data;
-    } else {            
-        // TODO: mejorar gestión de errores
-        // TODO: si la respuesta es un 401 no autorizado, debemos borrar el token (si es que lo tenemos);
-        throw new Error(data.message || JSON.stringify(data));
-    }
+    return await this.request(url, config);
+    // // const token = await this.getToken();
+    // const token = await userDataService.getToken();
+    // if (token) {
+    //     config.headers['Authorization'] = `Bearer ${token}`;
+    // }
+    // const response = await fetch(url, config);
+    // const data = await response.json();  // respuesta del servidor sea OK o sea ERROR.
+    // if (response.ok) {
+    //     return data;
+    // } else {            
+    //     // TODO: mejorar gestión de errores
+    //     // TODO: si la respuesta es un 401 no autorizado, debemos borrar el token (si es que lo tenemos);
+    //     throw new Error(data.message || JSON.stringify(data));
+    // }
 },
 
   deleteAdvertisement: async function (idAdvertisement) {
