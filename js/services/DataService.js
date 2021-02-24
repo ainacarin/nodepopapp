@@ -68,7 +68,7 @@ export default {
 
     if (response.ok) {
       const responseData = await response.json();
-      // return {};
+      console.log('response data'. responseData);
       return this.manageResponseData(responseData, null);
     } else {
       throw new Error(`HTTP: ${response.status}`);

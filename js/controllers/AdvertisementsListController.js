@@ -24,12 +24,11 @@ export default class AdvertisementsListController extends BaseController {
     }
 
     render(advertisements) {
-        console.log('render', advertisements);
-        // if(advertisements) {
-        //     const article = document.createElement('article');
-        //     article.innerHTML = emptyAdvertisementsList;
-        //     this.domElement.appendChild(article);
-        // } else{
+        if(advertisements.length <= 0) {
+            const article = document.createElement('article');
+            article.innerHTML = emptyAdvertisementsList;
+            this.domElement.appendChild(article);
+        } else{
 
             for (const advertisement of advertisements) {
                 const article = document.createElement('article');
@@ -51,7 +50,7 @@ export default class AdvertisementsListController extends BaseController {
                 }
                 this.domElement.appendChild(article);
             }
-        // }
+        }
     }
 
     async loadAllAdvertisements() {
