@@ -3,40 +3,43 @@ const TOKEN_KEY = "token";
 // const url = "http://localhost:8000/api/post";
 
 export default {
-  manageOneData(item, currentUser = null) {
+  manageOneResponseData(item, currentUser = null) {
     const modifiedItem = {
       id: item.id,
       name: item.name.replace(/(<([^>]+)>)/gi, ""),
       price: `${item.price}€`,
       sale: item.sale,
       image: item.image,
+      user: {
+        username: item.user.username.replace(/(<([^>]+)>)/gi, "")
+      },
       isFromCurrentUser: currentUser
         ? currentUser.userId === item.userId
         : false,
     };
-    if (currentUser) {
-      modifiedItem.user = {
-        username: currentUser.username.replace(/(<([^>]+)>)/gi, ""),
-      };
-    } else {
-      modifiedItem.user = {
-        username: item.user.username.replace(/(<([^>]+)>)/gi, ""),
-      };
-    }
+    // if (currentUser) {
+    //   modifiedItem.user = {
+    //     username: currentUser.username.replace(/(<([^>]+)>)/gi, ""),
+    //   };
+    // } else {
+    //   modifiedItem.user = {
+    //     username: item.user.username.replace(/(<([^>]+)>)/gi, ""),
+    //   };
+    // }
 
     return modifiedItem;
   },
 
   manageResponseData(responseData, currentUser = null) {
-    if (currentUser) {
-      // 1 advertisement
-      return this.manageOneData(responseData, currentUser);
-    } else {
+    // if (currentUser) {
+    //   // 1 advertisement
+    //   return this.manageOneData(responseData, currentUser);
+    // } else {
       // list advertisements
       return responseData.map((itemAdvertisement) => {
-        return this.manageOneData(itemAdvertisement);
+        return this.manageOneResponseData(itemAdvertisement);
       });
-    }
+    // }
   },
 
   getAllAdvertisements: async function () {
@@ -53,12 +56,12 @@ export default {
 
   getOneAdvertisement: async function (idAdvertisement) {
     const currentUser = await this.getUser();
-    const url = `${BASE_URL}api/advertisements/` + idAdvertisement;
+    const url = `${BASE_URL}api/advertisements/` + idAdvertisement + '?_expand=user';
     const response = await fetch(url);
 
     if (response.ok) {
       const responseData = await response.json();
-      return this.manageResponseData(responseData, currentUser);
+      return this.manageOneResponseData(responseData, currentUser);
       // return responseData;
     } else {
       throw new Error(`HTTP: ${response.status}`);
