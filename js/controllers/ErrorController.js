@@ -16,6 +16,10 @@ export default class ErrorController extends BaseController {
         //         this.domElement.classList.add('hidden');
         //     }
         // })
+
+        this.pubSub.subscribe(this.eventsText.ADVERTISEMENT_ERROR_DELETED, (error) => {
+            this.displayUrlError(error);
+        });
     }
 
     displayError(error) {
@@ -24,6 +28,17 @@ export default class ErrorController extends BaseController {
         this.domElement.addEventListener('click', (event) => {
             if (event.target == this.domElement || event.target.classList.contains('delete')) {
                 this.domElement.classList.add('hidden');
+            }
+        })
+    }
+
+    displayUrlError(error) {
+        this.domElement.innerHTML = errorView(error.message);
+        this.domElement.classList.remove('hidden');
+        this.domElement.addEventListener('click', (event) => {
+            if (event.target == this.domElement || event.target.classList.contains('delete')) {
+                this.domElement.classList.add('hidden');
+                error.callback();
             }
         })
     }

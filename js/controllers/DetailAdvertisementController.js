@@ -47,7 +47,14 @@ export default class DetailAdvertisementController extends BaseController {
                             window.location.href = '/';
                         }
                     } else{
-                        this.publish(this.eventsText.DISPLAY_ERROR, 'Anuncio no borrado. Debe de estar logueado para borrar el anuncio');
+                        // this.publish(this.eventsText.DISPLAY_ERROR, 'Anuncio no borrado. Debe de estar logueado para borrar el anuncio');
+                        const conf = {
+                            message: 'Anuncio no borrado. Debe de estar logueado para borrar el anuncio',
+                            callback: function() {
+                                window.location.href = '/login.html';
+                            }
+                        }
+                        this.publish(this.eventsText.ADVERTISEMENT_ERROR_DELETED, conf);
                         // console.log('');
                         // window.location.href = '/login.html';
                     }

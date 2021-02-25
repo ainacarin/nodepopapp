@@ -10,7 +10,8 @@ export default class BaseController {
             SHOW_LOADER: 'showLoader',
             HIDE_LOADER: 'hideLoader',
             DISPLAY_ERROR: 'displayError',
-            ADVERTISEMENT_DELETED: 'advertisementDeleted'
+            ADVERTISEMENT_DELETED: 'advertisementDeleted',
+            ADVERTISEMENT_ERROR_DELETED: 'advertisementDeleted'
         }
     }
 

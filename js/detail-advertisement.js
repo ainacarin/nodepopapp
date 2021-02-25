@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const detailAdvertisementDOMElement = document.querySelector('.advertisement-detail');
     new DetailAdvertisementController(detailAdvertisementDOMElement);
   
-    const errorDOMElement = document.querySelector('.global-errors');
+    const errorDOMElement = document.querySelector('.global-url-errors');
     new ErrorController(errorDOMElement);
 
 
