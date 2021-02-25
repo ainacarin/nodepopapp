@@ -42,14 +42,14 @@ export default class DetailAdvertisementController extends BaseController {
                         if (deleteConfirmed && advertisement.userId == userCurrent.userId) {
                             this.publish(this.eventsText.SHOW_LOADER);
                             await dataService.deleteAdvertisement(advertisementModified.id);
-                            this.publish(this.eventsText.ADVERTISEMENT_DELETED, {});
+                            // this.publish(this.eventsText.ADVERTISEMENT_DELETED, {});
                             console.log('');
                             window.location.href = '/';
                         }
                     } else{
                         this.publish(this.eventsText.DISPLAY_ERROR, 'Anuncio no borrado. Debe de estar logueado para borrar el anuncio');
-                        console.log('');
-                        window.location.href = '/login.html';
+                        // console.log('');
+                        // window.location.href = '/login.html';
                     }
                 } catch (error) {
                     this.publish(this.eventsText.DISPLAY_ERROR, error);
