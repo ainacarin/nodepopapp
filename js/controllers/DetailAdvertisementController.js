@@ -38,17 +38,25 @@ export default class DetailAdvertisementController extends BaseController {
                     const isUserLogged = await dataService.isUserLogged();
                     if(isUserLogged) {
                         const deleteConfirmed = confirm('¿Seguro que desea borrar el artículo?');
-                        if (deleteConfirmed) {
+                        const userCurrent = await dataService.getUser();
+                        if (deleteConfirmed && advertisement.userId == userCurrent.userId) {
+                            this.publish(this.eventsText.SHOW_LOADER);
                             await dataService.deleteAdvertisement(advertisementModified.id);
                             this.publish(this.eventsText.ADVERTISEMENT_DELETED, {});
+                            console.log('');
                             window.location.href = '/';
                         }
                     } else{
+                        this.publish(this.eventsText.DISPLAY_ERROR, 'Anuncio no borrado. Debe de estar logueado para borrar el anuncio');
+                        console.log('');
                         window.location.href = '/login.html';
                     }
                 } catch (error) {
                     this.publish(this.eventsText.DISPLAY_ERROR, error);
+                } finally {
+                    this.publish(this.eventsText.HIDE_LOADER);
                 }
+
             })
         }
         this.domElement.appendChild(article);

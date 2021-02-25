@@ -82,7 +82,10 @@ export default {
 
     if (response.ok) {
       const responseData = await response.json();
-      return this.manageOneResponseData(responseData, currentUser);
+      const responseDataModified = this.manageOneResponseData(responseData, currentUser);
+      responseDataModified.userId = responseData.userId;
+      // return this.manageOneResponseData(responseData, currentUser);
+      return responseDataModified;
     } else {
       throw new Error(`HTTP: ${response.status}`);
     }
