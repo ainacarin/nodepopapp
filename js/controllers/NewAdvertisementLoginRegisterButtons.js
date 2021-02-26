@@ -16,10 +16,11 @@ export default class NewAdvertisementLoginRegisterButtons extends BaseController
         if(isUserLogged){
             const newAdvertisementButton = this.domElement.querySelector('.new-advertisement-button');
             newAdvertisementButton.classList.remove('is-hidden');
-        } else {
-            const loginRegisterButtons = this.domElement.querySelector('.login-register-buttons');
-            loginRegisterButtons.classList.remove('is-hidden');
         }
+        // } else {
+        //     const loginRegisterButtons = this.domElement.querySelector('.login-register-buttons');
+        //     loginRegisterButtons.classList.remove('is-hidden');
+        // }
     }
 
 }
