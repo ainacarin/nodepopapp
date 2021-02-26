@@ -2,7 +2,7 @@ import BaseController from './BaseController.js';
 import dataService from '../services/DataService.js'
 
 
-export default class NewAdvertisementLoginRegisterButtons extends BaseController{
+export default class NewAdvertisementButton extends BaseController{
 
     constructor(domElement) {
         super(domElement);
