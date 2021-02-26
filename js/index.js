@@ -1,7 +1,8 @@
 import AdvertisementsListController from './controllers/AdvertisementsListController.js';
 import LoaderController from './controllers/LoaderController.js';
 import ErrorController from './controllers/ErrorController.js';
-import NewAdvertisementLoginRegisterButtons from './controllers/NewAdvertisementLoginRegisterButtons.js'
+import NewAdvertisementLoginRegisterButtons from './controllers/NewAdvertisementLoginRegisterButtons.js';
+import LogoutLoginRegisterButtons from './controllers/LogoutLoginRegisterButtons.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
@@ -17,4 +18,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   const newAdvertisementButtons = document.querySelector('.new-advertisement');
   new NewAdvertisementLoginRegisterButtons(newAdvertisementButtons);
+
+  const logoutLoginRegisterButtons = document.querySelector('.login-logout-register');
+  new LogoutLoginRegisterButtons(logoutLoginRegisterButtons);
+
 })

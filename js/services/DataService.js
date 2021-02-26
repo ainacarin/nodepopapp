@@ -149,6 +149,11 @@ export default {
     await userDataService.saveToken(token);
   },
 
+  deleteToken: async function () {
+    // localStorage.setItem(TOKEN_KEY, token);
+    await userDataService.deleteToken();
+  },
+
   // getToken: async function () {
     // return localStorage.getItem(TOKEN_KEY);
   // },
