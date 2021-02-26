@@ -17,9 +17,8 @@ export const advertisementView = (advertisement) => {
       <div class="card-content">
         <div class="media">
           <div class="media-content">
-          <p class="subtitle is-6">${advertisement.id}</p>
+          <p class="title is-4 is-pulled-right">${advertisement.price}</p>
             <p class="subtitle is-6">${advertisement.saleText}</p>
-            <p class="title is-4">${advertisement.price}</p>
             <p class="subtitle is-6">${advertisement.user.username}</p>
             <p class="field is-pulled-right">${buttonDetailHTML}</p>
           </div>
