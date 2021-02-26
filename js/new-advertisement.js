@@ -2,6 +2,7 @@
 import LoaderController from './controllers/LoaderController.js';
 import ErrorController from './controllers/ErrorController.js';
 import NewAdvertisementController from './controllers/NewAdvertisementController.js';
+import LogoutLoginRegisterButtons from './controllers/LogoutLoginRegisterButtons.js';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const errorDOMElement = document.querySelector('.global-errors');
     new ErrorController(errorDOMElement);
 
+    const logoutLoginRegisterButtons = document.querySelector('.login-logout-register');
+    new LogoutLoginRegisterButtons(logoutLoginRegisterButtons);
 
 
 })
