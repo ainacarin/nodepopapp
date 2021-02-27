@@ -100,7 +100,7 @@
   
 
 /* Cards */
-.card { margin: 40px auto; }
+.card { margin: 5rem auto; }
 
 /* Global errors */
 .global-errors.hidden{
@@ -142,3 +142,9 @@
       z-index: 98;
     }
 
+  .list-nodepop-button {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 98;
+  }
