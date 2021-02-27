@@ -3,6 +3,7 @@ import LoaderController from './controllers/LoaderController.js';
 import ErrorController from './controllers/ErrorController.js';
 import NewAdvertisementButton from './controllers/NewAdvertisementButton.js';
 import LogoutLoginRegisterButtons from './controllers/LogoutLoginRegisterButtons.js';
+import NodepopButton from './controllers/NodepopButton.js'
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
@@ -22,4 +23,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const logoutLoginRegisterButtons = document.querySelector('.login-logout-register');
   new LogoutLoginRegisterButtons(logoutLoginRegisterButtons);
 
+  const nodepopButton = document.querySelector('.list-nodepop-button');
+  new NodepopButton(nodepopButton);
 })

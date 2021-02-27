@@ -9,6 +9,7 @@ export default class LoginController extends BaseController {
 
         //config Listeners
         this.configAllListeners();
+
     }
 
     redirect() {
