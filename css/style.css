@@ -100,7 +100,20 @@
   
 
 /* Cards */
-.card { margin: 5rem auto; }
+.detail-card { 
+  margin: 5rem auto; 
+}
+
+.card-item { 
+  margin: 1rem; 
+  min-width: 15rem;
+  max-width: 25rem;
+  /* padding: 5rem; */
+}
+
+.card-empty-item {
+  top: 5rem;
+}
 
 /* Global errors */
 .global-errors.hidden{

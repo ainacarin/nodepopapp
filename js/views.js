@@ -8,7 +8,7 @@ export const advertisementView = (advertisement) => {
         </figure>
         </div>`;
     }
-    return `<div class="card">
+    return `<div class="card is-one-third card-item">
     <div class="card-header">
     <div class="card-header-title is-centered">
     ${advertisement.name}
@@ -19,7 +19,7 @@ export const advertisementView = (advertisement) => {
           <div class="media-content">
           <p class="title is-4 is-pulled-right">${advertisement.price}</p>
             <p class="subtitle is-6">${advertisement.saleText}</p>
-            <p class="subtitle is-6">${advertisement.user.username}</p>
+            <p class="subtitle is-7">${advertisement.user.username}</p>
             <p class="field is-pulled-right">${buttonDetailHTML}</p>
           </div>
         </div>
@@ -55,7 +55,7 @@ export const advertisementDetailView = (advertisement) => {
         </figure>
         </div>`;
     }
-    return `<div class="card">
+    return `<div class="card detail-card">
     <div class="card-header">
         <div class="card-header-title is-centered">
         ${advertisement.name}
@@ -75,7 +75,7 @@ export const advertisementDetailView = (advertisement) => {
 </div>`
   };
 
-  export const emptyAdvertisementsList =  `<div class="card">
+  export const emptyAdvertisementsList =  `<div class="card card-empty-item">
     <div class="card-header">
     <div class="card-header-title is-centered">
     No hay anuncios para mostrar
