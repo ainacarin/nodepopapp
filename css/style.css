@@ -148,3 +148,7 @@
     top: 1rem;
     z-index: 98;
   }
+
+  .top-5rem {
+    top: 5rem;
+  }
