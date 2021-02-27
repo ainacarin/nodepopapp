@@ -74,8 +74,6 @@ export default class LoginController extends BaseController {
 
 
     configAllListeners() {
-        // const button = this.domElement.querySelector('button');
-        // button.removeAttribute('disabled');
 
         // submit form listener
         this.configSubmitListener();

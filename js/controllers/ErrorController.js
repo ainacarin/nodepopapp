@@ -11,11 +11,6 @@ export default class ErrorController extends BaseController {
             this.displayError(error);
         });
 
-        // this.domElement.addEventListener('click', (event) => {
-        //     if (event.target == this.domElement || event.target.classList.contains('delete')) {
-        //         this.domElement.classList.add('hidden');
-        //     }
-        // })
 
         this.pubSub.subscribe(this.eventsText.ADVERTISEMENT_ERROR_DELETED, (error) => {
             this.displayUrlError(error);

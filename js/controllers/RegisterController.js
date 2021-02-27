@@ -49,19 +49,6 @@ export default class RegisterController extends BaseController {
         }
     }
     
-    // configOneInputListener(inputElement) {
-    //     inputElement.addEventListener('keyup', (event) => {
-    //         if(inputElement.validity.valid) {
-    //             inputElement.classList.add('is-success');
-    //             inputElement.classList.remove('is-danger');
-    //         } else {
-    //             inputElement.classList.add('is-danger');
-    //             inputElement.classList.remove('is-success');
-    //         }
-    //         // after each keyup validates the form to change disabled attribute
-    //         this.checkValidityRegisterForm();
-    //     })
-    // }
 
     configAllInputsListeners() {
         this.domElement.querySelectorAll('input').forEach(inputElement => {
@@ -81,8 +68,6 @@ export default class RegisterController extends BaseController {
 
 
     configAllListeners() {
-        // const button = this.domElement.querySelector('button');
-        // button.removeAttribute('disabled');
 
         // submit form listener
         this.configSubmitListener();
