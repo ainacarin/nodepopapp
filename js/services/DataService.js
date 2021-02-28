@@ -73,7 +73,13 @@ export default {
 
       return responseDataModified;
     } else {
-      throw new Error(`HTTP: ${response.status}`);
+      let errorMessage = `HTTP: ${response.status}`;
+      console.log('errorMessage', response.status);
+      if(response.status == 404) {
+        errorMessage = 'El anuncio no existe';
+      }
+      throw new Error(errorMessage);
+      // throw new Error(`HTTP: ${response.status}`);
     }
   },
 
