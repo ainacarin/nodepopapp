@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodepop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+  
+      <div class="global-errors hidden"></div>
+
+      
+    <div class="list-nodepop-button">
+      <a href="/index.html" class="button is-hidden is-primary nodepop-button">N0DEP0P</a>
+    </div>
+
+      <div class="login-logout-register">
+        <a href="/index.html" class="button is-primary is-hidden logout-button">Logout</a>
+  
+        <div class="is-hidden login-register-buttons">
+          <a href="/login.html" class="button is-primary login-button">Login</a>
+          <a href="/register.html" class="button is-primary register-button">Registro</a>
+        </div>
+      </div>
+
+    <div class="container top-5rem">
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <h1 class="title">Nuevo anuncio</h1>
+                <form class="column is-two-thirds new-advertisement-form">
+                    <p class="field">
+                        <label class="label label-name" for="name">Nombre del artículo</label>
+                        <input id="name" name="name" class="input is-rounded input-name is-info" type="text" placeholder="Example" required>
+                    </p>
+                    <p class="field">
+                        <label class="label label-sale" for="selectSale">¿Qué desea hacer con el artículo?</label>
+                          <div class="select is-rounded select-sale is-info">
+                            <select id="selectSale" name="selectSale" required>
+                              <option value="">Seleccione una opción</option>
+                              <option value="true">Se vende</option>
+                              <option value="false">Se busca</option>
+                            </select>
+                          </div>
+                    </p>
+                    <p class="field">
+                        <label class="label label-price" for="price">Precio (€)</label>
+                        <input name="price" id="price" class="input is-rounded input-price is-info" type="number" step="0.01" min="0.00" required>
+                      </p>
+                      <p class="field">
+                        <label class="label label-image" for="image">Imagen del artículo</label>
+                        <input type="file" name="image" id="image" accept="image/*" class="is-primary is-rounded input-image is-info">
+                    </p>
+                    <p class="field">
+                        <button class="button is-primary is-pulled-right button-new-advertisement" disabled>Publicar</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/new-advertisement.js"></script>
+</body>
+</html>

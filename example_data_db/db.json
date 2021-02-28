@@ -1,0 +1,187 @@
+{
+  "advertisements": [
+    {
+      "userId": 1,
+      "id": 1,
+      "name": "bicicleta",
+      "sale": true,
+      "price": 230.15,
+      "image": "bici.jpg"
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "name": "iphone 3GS",
+      "sale": false,
+      "price": 50,
+      "image": "iphone.jpg"
+    },
+    {
+      "userId": 2,
+      "id": 3,
+      "name": "ratón ergonómico",
+      "sale": true,
+      "price": 15,
+      "image": "ratonergo.jpg"
+    },
+    {
+      "userId": 3,
+      "id": 4,
+      "name": "teclado mecánico mars gaming",
+      "sale": true,
+      "price": 65,
+      "image": "tecladomarsgaming.jpg"
+    },
+    {
+      "userId": 1,
+      "id": 5,
+      "name": "patines linea",
+      "sale": false,
+      "price": 38,
+      "image": "patineslinea.jpg"
+    },
+    {
+      "userId": 4,
+      "id": 6,
+      "name": "tablet teclast t10",
+      "sale": true,
+      "price": 189,
+      "image": "teclastt10.jpg"
+    },
+    {
+      "userId": 5,
+      "id": 7,
+      "name": "tablet samsung tab a",
+      "sale": true,
+      "price": 50,
+      "image": "tablettaba.jpg"
+    },
+    {
+      "userId": 2,
+      "id": 8,
+      "name": "iphone 12 Pro",
+      "sale": true,
+      "price": 857,
+      "image": "iphone12pro.jpg"
+    },
+    {
+      "name": "lámpara de sobremesa",
+      "sale": true,
+      "price": "25.25",
+      "image": "http://localhost:8000//file-1613905684299.png",
+      "userId": 3,
+      "updatedAt": "2021-02-21T11:08:04.317Z",
+      "id": 11
+    },
+    {
+      "name": "bolsa de tela para comprar",
+      "sale": false,
+      "price": "1.50",
+      "image": "http://localhost:8000//file-1614157424101.PNG",
+      "userId": 4,
+      "updatedAt": "2021-02-24T09:03:44.148Z",
+      "id": 12
+    },
+    {
+      "name": "portátil lenovo",
+      "sale": false,
+      "price": "1000",
+      "image": null,
+      "userId": 2,
+      "updatedAt": "2021-02-24T09:14:27.401Z",
+      "id": 13
+    },
+    {
+      "name": "revistero metalizado negro",
+      "sale": true,
+      "price": "10",
+      "image": null,
+      "userId": 4,
+      "updatedAt": "2021-02-24T17:08:52.049Z",
+      "id": 16
+    },
+    {
+      "name": "molde de silicona para horno",
+      "sale": false,
+      "price": "28.99",
+      "image": null,
+      "userId": 5,
+      "updatedAt": "2021-02-25T18:49:31.828Z",
+      "id": 17
+    },
+    {
+      "name": "panificadora, zero glu, a estrenar",
+      "sale": false,
+      "price": "189.98",
+      "image": null,
+      "userId": 1,
+      "updatedAt": "2021-02-26T09:28:03.920Z",
+      "id": 18
+    },
+    {
+      "name": "funda para sofá de 2 plazas",
+      "sale": true,
+      "price": "12.90",
+      "image": "http://localhost:8000//file-1614417285699.PNG",
+      "userId": 4,
+      "updatedAt": "2021-02-27T09:14:49.663Z",
+      "id": 19
+    },
+    {
+      "name": "Pantalla 20\" con pixeles 100% útiles",
+      "sale": false,
+      "price": "80.25",
+      "image": null,
+      "userId": 6,
+      "updatedAt": "2021-02-28T10:23:48.550Z",
+      "id": 20
+    }
+  ],
+  "users": [
+    {
+      "username": "dani@rovira",
+      "password": "$2b$10$MsFc2RhdJhNBCJX5m6GBsuFSyibfYJYgfP6Pz/MSyyBX0meZe00/2",
+      "id": 1
+    },
+    {
+      "username": "ernesto@sevilla",
+      "password": "$2b$10$MsFc2RhdJhNBCJX5m6GBsuG79kQV38TmEAfKHqNMPjwMMvNMvtpDO",
+      "id": 2
+    },
+    {
+      "username": "andreu@buenafuente",
+      "password": "$2b$10$MsFc2RhdJhNBCJX5m6GBsu4dktVEhmgHCwlOlu9TZ7cocbOM.C7S.",
+      "id": 3
+    },
+    {
+      "username": "luis@piedrahita",
+      "password": "$2b$10$MsFc2RhdJhNBCJX5m6GBsuaDJR5/DtFnntoytdFlVb0x9z4rNL6fW",
+      "id": 4
+    },
+    {
+      "username": "joaquin@reyes",
+      "password": "$2b$10$MsFc2RhdJhNBCJX5m6GBsumeChYzsIm3/mIvpYGn/bFEylgfYzvfO",
+      "id": 5
+    },
+    {
+      "username": "eva@hache",
+      "password": "$2b$10$9izYbcGvPjc249ymRB/tFuJYF7CSbasqljSFDl2hPwFfOw.hfElcu",
+      "id": 6
+    },
+    {
+      "username": "berto@romero",
+      "password": "$2b$10$9izYbcGvPjc249ymRB/tFupcJE6ZnZYb3bqqQZYfrkHvXh9brbos2",
+      "id": 7
+    },
+    {
+      "username": "lina@morgan",
+      "password": "$2b$10$9izYbcGvPjc249ymRB/tFus9vPZzhv544GbcpOwCe5CYv/xgiYQMq",
+      "id": 8
+    },
+    {
+      "username": "santiago@segura",
+      "password": "$2b$10$9izYbcGvPjc249ymRB/tFuNVJdfvgIP3uSy8cNuozByXnKJuIVz7S",
+      "id": 9
+    }
+  ]
+}
