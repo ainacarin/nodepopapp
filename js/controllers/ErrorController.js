@@ -15,6 +15,10 @@ export default class ErrorController extends BaseController {
         this.pubSub.subscribe(this.eventsText.ADVERTISEMENT_ERROR_DELETED, (error) => {
             this.displayUrlError(error);
         });
+
+        this.pubSub.subscribe(this.eventsText.ADVERTISEMENT_ERROR_NEW, (error) => {
+            this.displayUrlError(error);
+        });
     }
 
     displayError(error) {

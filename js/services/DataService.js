@@ -1,3 +1,4 @@
+import { advertisementView } from '../views.js';
 import userDataService from './UserService.js';
 
 const BASE_URL = "http://localhost:8000/";
@@ -42,10 +43,15 @@ export default {
     if (response.ok) {
       return responseData;
     } else {
-      if(response.status == 401 && userDataService.isUserLogged()) { //Unauthorized + token => delete token
+      let resCustom = 'Error de permisos. Acceda al login para identificarse.'
+      const isUser = await userDataService.isUserLogged();
+      if(response.status == 401 && isUser) { //Unauthorized + token => delete token
         userDataService.deleteToken();
+        throw new Error(resCustom);
+      } else {
+          throw new Error(responseData.message || JSON.stringify(responseData));
       }
-      throw new Error(responseData.message || JSON.stringify(responseData));
+      // throw new Error(responseData.message || JSON.stringify(responseData));
     }
   },
 

@@ -11,7 +11,8 @@ export default class BaseController {
             HIDE_LOADER: 'hideLoader',
             DISPLAY_ERROR: 'displayError',
             ADVERTISEMENT_DELETED: 'advertisementDeleted',
-            ADVERTISEMENT_ERROR_DELETED: 'advertisementDeleted'
+            ADVERTISEMENT_ERROR_DELETED: 'advertisementErrorDeleted',
+            ADVERTISEMENT_ERROR_NEW: 'advertisementErrorNew'
         }
     }
 
@@ -22,4 +23,5 @@ export default class BaseController {
     publish(eventName, eventData) {  
         this.pubSub.publish(eventName, eventData);
     }
+
 }

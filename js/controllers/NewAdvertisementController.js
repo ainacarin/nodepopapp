@@ -32,25 +32,59 @@ export default class NewAdvertisementController extends BaseController {
     configNewAdvertisementButtonListeners() {
         this.domElement.addEventListener('submit', async event => {
             event.preventDefault();
-            const sale = this.domElement.elements.selectSale.options[selectSale.selectedIndex].value;
-            const advertisement = {
-                name: this.domElement.elements.name.value,
-                sale: sale,
-                price: this.domElement.elements.price.value,
-                image: null
-            }
-            if (this.domElement.elements.image.files.length > 0) {
-                advertisement.image = this.domElement.elements.image.files[0];
-            } 
-            this.publish(this.eventsText.SHOW_LOADER);
             try {
-                await dataService.saveNewAdvertisement(advertisement);
-                window.location.href = '/?note=newadvOk';
+                const isUserLogged = await dataService.isUserLogged();
+                if(isUserLogged) {
+                    const sale = this.domElement.elements.selectSale.options[selectSale.selectedIndex].value;
+                    const advertisement = {
+                        name: this.domElement.elements.name.value,
+                        sale: sale,
+                        price: this.domElement.elements.price.value,
+                        image: null
+                    }
+                    if (this.domElement.elements.image.files.length > 0) {
+                        advertisement.image = this.domElement.elements.image.files[0];
+                    } 
+                    this.publish(this.eventsText.SHOW_LOADER);
+                    await dataService.saveNewAdvertisement(advertisement);
+                    
+                    console.log('');
+                    window.location.href = '/?note=newadvOk';
+                } else{
+                    const conf = {
+                        message: 'Anuncio no creado. Debe de estar logueado para crear el anuncio',
+                        callback: function() {
+                            window.location.href = '/login.html';
+                        }
+                    }
+                    this.publish(this.eventsText.ADVERTISEMENT_ERROR_NEW, conf);
+                }
             } catch (error) {
                 this.publish(this.eventsText.DISPLAY_ERROR, error);
             } finally {
                 this.publish(this.eventsText.HIDE_LOADER);
             }
+
+
+            // const sale = this.domElement.elements.selectSale.options[selectSale.selectedIndex].value;
+            // const advertisement = {
+            //     name: this.domElement.elements.name.value,
+            //     sale: sale,
+            //     price: this.domElement.elements.price.value,
+            //     image: null
+            // }
+            // if (this.domElement.elements.image.files.length > 0) {
+            //     advertisement.image = this.domElement.elements.image.files[0];
+            // } 
+            // this.publish(this.eventsText.SHOW_LOADER);
+            // try {
+            //     await dataService.saveNewAdvertisement(advertisement);
+            //     window.location.href = '/?note=newadvOk';
+            // } catch (error) {
+            //     this.publish(this.eventsText.DISPLAY_ERROR, error);
+            // } finally {
+            //     this.publish(this.eventsText.HIDE_LOADER);
+            // }
         })
     }
 
